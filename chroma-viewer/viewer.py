@@ -12,10 +12,8 @@ pd.set_option('display.max_columns', 4)
 
 def view_collections(dir):
     st.markdown("### DB Path: %s" % dir)
-    
-    client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet",
-                                        persist_directory=dir
-                                    ))
+
+    client = chromadb.PersistentClient(path=dir)
 
     # This might take a while in the first execution if Chroma wants to download
     # the embedding transformer
